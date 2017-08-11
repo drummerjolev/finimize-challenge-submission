@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="header-banner">
+        {/*<div className="header-banner">
           <h1 className="fmz-white-font">Finimize Interest Rate Calculator</h1>
         </div>
 				<div className="financial-inputs">
@@ -22,8 +22,6 @@ class App extends Component {
 					<SliderInput defaultValue={4}/>
 				</div>
 				<div className="financial-display">
-					{/*We have included some sample data here, you will need to replace this
-					with your own. Feel free to change the data structure if you wish.*/}
 					<DisplayGraph data={[
 						{
 							month: 1,
@@ -43,6 +41,7 @@ class App extends Component {
 						}
 					]}/>
 				</div>
+        */}
       </div>
     );
   }
