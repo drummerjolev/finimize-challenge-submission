@@ -1,7 +1,7 @@
 const initialState = {
-  initialAmount: 0.0,
-  monthlyAmount: 0.0,
-  interestRate: 0.0,
+  initialAmount: 1.0,
+  monthlyAmount: 1.0,
+  interestRate: 4.0,
   currency: 'GBP',
   interestFrequency: 'Annually',
   amounts: [],
