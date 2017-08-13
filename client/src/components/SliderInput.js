@@ -17,4 +17,9 @@ const SliderInput = ({ value, handleChange }) => {
 	)
 }
 
+SliderInput.propTypes = {
+	value: PropTypes.number,
+	handleChange: PropTypes.func,
+}
+
 export default SliderInput;

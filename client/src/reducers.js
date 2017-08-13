@@ -5,6 +5,7 @@ const initialState = {
   currency: 'GBP',
   interestFrequency: 'Annually',
   amounts: [],
+  isFetching: false,
 }
 
 const finimizeApp = (state = initialState, action) => {
@@ -39,6 +40,17 @@ const finimizeApp = (state = initialState, action) => {
       return {
         ...state,
         amounts: action.amounts,
+      }
+    case 'REQUEST_VALUES':
+      return {
+        ...state,
+        isFetching: true,
+      }
+    case 'RECEIVE_VALUES':
+      return {
+        ...state,
+        isFetching: false,
+        amounts: action.data,
       }
     default:
       return state;

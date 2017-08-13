@@ -1,7 +1,7 @@
 import React from 'react';
-import CurrencyInput from './components/CurrencyInput'
-import SliderInput from './components/SliderInput'
-import DisplayGraph from './components/DisplayGraph'
+import CurrencyInput from './components/CurrencyInput';
+import SliderInput from './components/SliderInput';
+import DisplayGraph from './components/DisplayGraph';
 import './App.css';
 
 const App = ({
@@ -73,5 +73,7 @@ const App = ({
     </div>
   );
 }
+
+// display grand total after 50 years
 
 export default App;
