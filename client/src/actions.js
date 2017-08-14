@@ -49,23 +49,28 @@ function requestValues() {
 }
 
 function receiveValues(json) {
-  console.log(json);
+  console.log('received values');
   return {
     type: 'RECEIVE_VALUES',
-    // data: json.data.children.map(child => child.data),
-    data: []
+    data: json.monthly_amounts.map((month, idx) => {
+      return {
+        month: idx + 1,
+        amount: month,
+      }
+    }),
   }
 }
 
 function fetchValues(state) {
   return dispatch => {
     dispatch(requestValues());
-    return fetch(`http://localhost:3000/compute?
-      initial_amount=${state.initialAmount}&
-      monthly_amount=${state.monthlyAmount}&
-      interest_rate=${state.interestRate}&
-      interest_schedule=${state.interestFrequency}&
-      currency=${state.currency}`)
+    const request = 'http://localhost:3000/compute?' +
+      `initial_amount=${state.initialAmount}&` +
+      `monthly_amount=${state.monthlyAmount}&` +
+      `interest_rate=${state.interestRate / 100}&` +
+      `interest_schedule=${state.interestFrequency}&` +
+      `currency=${state.currency}`;
+    return fetch(request)
       .then(
         response => response.json(),
         error => console.log('There was an error: ', error),

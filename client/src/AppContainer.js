@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 import {
   changeInitialAmount,
   changeMonthlyAmount,
-  changeInterest
+  changeInterest,
+  fetchValuesIfNeeded,
 } from './actions';
 import App from './App';
 
@@ -14,20 +15,26 @@ const mapStateToProps = state => {
     monthlyAmount: state.monthlyAmount,
     interestFrequency: state.interestFrequency,
     amounts: state.amounts,
+    isFetching: state.isFetching,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     onInitialAmountChange: amount => {
-      console.log(amount);
       dispatch(changeInitialAmount(amount));
+      dispatch(fetchValuesIfNeeded());
     },
     onMonthlyAmountChange: amount => {
       dispatch(changeMonthlyAmount(amount));
+      dispatch(fetchValuesIfNeeded());
     },
     onInterestRateChange: rate => {
       dispatch(changeInterest(rate));
+      dispatch(fetchValuesIfNeeded());
+    },
+    onDataChange: () => {
+      dispatch(fetchValuesIfNeeded());
     }
   }
 }

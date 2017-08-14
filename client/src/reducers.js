@@ -3,7 +3,7 @@ const initialState = {
   monthlyAmount: 1.0,
   interestRate: 4.0,
   currency: 'GBP',
-  interestFrequency: 'Annually',
+  interestFrequency: 12,
   amounts: [],
   isFetching: false,
 }
