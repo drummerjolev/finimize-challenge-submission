@@ -25,7 +25,7 @@ class App extends React.Component {
       onDisplayCurrencyChange,
       amounts,
     } = this.props;
-    const finalAmount = amounts.length ? amounts[amounts.length - 1].amount : 0;
+    const finalAmount = amounts !== undefined && amounts.length ? amounts[amounts.length - 1].amount : 0;
     return (
       <div className="App">
         <div className="header-banner">
