@@ -2,7 +2,7 @@ const initialState = {
   initialAmount: 1.0,
   monthlyAmount: 1.0,
   interestRate: 4.0,
-  currency: 'GBP',
+  displayCurrency: 'GBP',
   interestFrequency: 12,
   amounts: [],
   isFetching: false,
@@ -28,13 +28,12 @@ const finimizeApp = (state = initialState, action) => {
     case 'CURRENCY':
       return {
         ...state,
-        currency: action.currency,
+        displayCurrency: action.displayCurrency,
       }
     case 'INTEREST_FREQUENCY':
-      // TODO: guard against valid types
       return {
         ...state,
-        frequency: action.frequency,
+        interestFrequency: action.frequency,
       }
     case 'AMOUNTS':
       return {

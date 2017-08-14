@@ -19,10 +19,10 @@ export const changeInterest = rate => {
   }
 }
 
-export const changeCurrency = currency => {
+export const changeDisplayCurrency = displayCurrency => {
   return {
     type: 'CURRENCY',
-    currency
+    displayCurrency
   }
 }
 
@@ -42,14 +42,12 @@ export const changeAmounts = amounts => {
 
 // fetching data from server
 function requestValues() {
-  console.log('requesting values');
   return {
     type: 'REQUEST_VALUES',
   }
 }
 
 function receiveValues(json) {
-  console.log('received values');
   return {
     type: 'RECEIVE_VALUES',
     data: json.monthly_amounts.map((month, idx) => {
@@ -69,7 +67,7 @@ function fetchValues(state) {
       `monthly_amount=${state.monthlyAmount}&` +
       `interest_rate=${state.interestRate / 100}&` +
       `interest_schedule=${state.interestFrequency}&` +
-      `currency=${state.currency}`;
+      `to_currency=${state.displayCurrency}`;
     return fetch(request)
       .then(
         response => response.json(),

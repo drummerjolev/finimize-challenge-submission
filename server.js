@@ -1,4 +1,5 @@
 const express = require('express');
+const http = require("http");
 
 const app = express();
 
@@ -6,11 +7,11 @@ app.set('port', (process.env.PORT || 3001));
 
 app.get('/compute', function (req, res) {
   const {
-    currency,
     initial_amount,
     monthly_amount,
     interest_rate,
-    interest_schedule
+    interest_schedule,
+    to_currency,
   } = req.query;
 
   let currentVal = parseFloat(initial_amount);
@@ -35,10 +36,32 @@ app.get('/compute', function (req, res) {
     monthlyAmounts.push(currentVal);
   }
 
-  return res.json({
-    monthly_amounts: monthlyAmounts,
-    success: true,
-  });
+  // convert to foreign currency if necessary
+  if (to_currency !== 'GBP') {
+    http.get({
+        host: 'api.fixer.io',
+        path: '/latest?base=GBP'
+    }, function(response) {
+        var body = '';
+        response.on('data', function(d) {
+            body += d;
+        });
+        response.on('end', function() {
+            const parsed = JSON.parse(body);
+            const exchangeRate = parsed.rates[to_currency];
+            return res.json({
+              monthly_amounts: monthlyAmounts.map(amount => exchangeRate * amount),
+              success: true,
+            });
+        });
+    });
+  } else {
+    return res.json({
+      monthly_amounts: monthlyAmounts,
+      success: true,
+    });
+  }
+
 })
 
 // Express only serves static assets in production
